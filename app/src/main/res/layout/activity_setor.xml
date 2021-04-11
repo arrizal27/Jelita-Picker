@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.setor.SetorActivity"
+    android:background="@drawable/ic_background_orange">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Setor Minyak"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="24dp"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@drawable/container_white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pilih Pengepul"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+        <Spinner
+            android:id="@+id/list_pengepul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foto Bukti"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"/>
+        <ImageView
+            android:id="@+id/view_foto_bukti"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+            app:tint="@color/grey"
+            android:background="#e5e5e5"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upload_foto"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Upload Foto"
+            app:iconGravity="textStart"
+            android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_baseline_photo_camera_24"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Metode Pembayaran"
+            android:layout_marginTop="24dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/list_metode_bayar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                app:icon="@drawable/ic_baseline_arrow_back_24"
+                app:iconTint="@color/yellow"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="6dp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/yellow_dark"
+                android:text="Kembali"
+                style="?attr/materialButtonOutlinedStyle"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_setor_now"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                app:cornerRadius="6dp"
+                android:layout_alignParentRight="true"
+                android:text="Setor Sekarang"/>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

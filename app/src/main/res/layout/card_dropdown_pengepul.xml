@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nama_pengepul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SMK Negeri 4 Bandung"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+    <TextView
+        android:id="@+id/no_telp_pengepul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="08123456789"
+        android:textColor="@color/grey"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+    <TextView
+        android:id="@+id/alamat_pengepul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jl. Kliningan No. 6, Turangga"
+        android:textColor="@color/grey"
+        android:layout_weight="1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+</LinearLayout>

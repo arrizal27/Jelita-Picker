@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "280826785622",
+    "firebase_url": "https://jelita-f8a34-default-rtdb.firebaseio.com",
+    "project_id": "jelita-f8a34",
+    "storage_bucket": "jelita-f8a34.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280826785622:android:8df717719c3477891af0f7",
+        "android_client_info": {
+          "package_name": "com.smkn4bdg.jelita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280826785622-hrmrj7rm7km4b87n0qemp2rf703ata9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcoUCBR0DnKCtMbRURtlbWkfl7ZepZY-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280826785622-hrmrj7rm7km4b87n0qemp2rf703ata9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280826785622:android:fddd80ee23d667971af0f7",
+        "android_client_info": {
+          "package_name": "com.smkn4bdg.jelitapicker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280826785622-hrmrj7rm7km4b87n0qemp2rf703ata9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcoUCBR0DnKCtMbRURtlbWkfl7ZepZY-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280826785622-hrmrj7rm7km4b87n0qemp2rf703ata9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
