@@ -1,30 +1,28 @@
 package com.smkn4bdg.jelitapicker.Models;
 
-public class RequestSetorUser {
+public class RequestSetorPengepul {
     private String id;
-
-    private String id_pengepul;
-    private String nama_pengepul;
-    private String no_telp_pengepul;
+    private String nama_user;
     private String alamat_user;
+    private String no_telp_user;
     private String tanggal_setor;
-    private String foto_bukti;
+    private String foto;
     private String jenis_pembayaran;
     private String alasantolak;
     private double total_uang;
     private String status;
 
-    public RequestSetorUser(){
+    public RequestSetorPengepul(){
 
     }
 
-    public RequestSetorUser(String id, String nama_pengepul, String no_telp_pengepul, String alamat_user, String tanggal_setor, String foto_bukti, String jenis_pembayaran, String alasantolak, double total_uang, String status) {
+    public RequestSetorPengepul(String id, String nama_user, String alamat_user, String no_telp_user, String tanggal_setor, String foto, String jenis_pembayaran, String alasantolak, double total_uang, String status) {
         this.id = id;
-        this.nama_pengepul = nama_pengepul;
-        this.no_telp_pengepul = no_telp_pengepul;
+        this.nama_user = nama_user;
         this.alamat_user = alamat_user;
+        this.no_telp_user = no_telp_user;
         this.tanggal_setor = tanggal_setor;
-        this.foto_bukti = foto_bukti;
+        this.foto = foto;
         this.jenis_pembayaran = jenis_pembayaran;
         this.alasantolak = alasantolak;
         this.total_uang = total_uang;
@@ -39,29 +37,12 @@ public class RequestSetorUser {
         this.id = id;
     }
 
-
-    public String getId_pengepul() {
-        return id_pengepul;
+    public String getNama_user() {
+        return nama_user;
     }
 
-    public void setId_pengepul(String id_pengepul) {
-        this.id_pengepul = id_pengepul;
-    }
-
-    public String getNama_pengepul() {
-        return nama_pengepul;
-    }
-
-    public void setNama_pengepul(String nama_pengepul) {
-        this.nama_pengepul = nama_pengepul;
-    }
-
-    public String getNo_telp_pengepul() {
-        return no_telp_pengepul;
-    }
-
-    public void setNo_telp_pengepul(String no_telp_pengepul) {
-        this.no_telp_pengepul = no_telp_pengepul;
+    public void setNama_user(String nama_user) {
+        this.nama_user = nama_user;
     }
 
     public String getAlamat_user() {
@@ -72,6 +53,14 @@ public class RequestSetorUser {
         this.alamat_user = alamat_user;
     }
 
+    public String getNo_telp_user() {
+        return no_telp_user;
+    }
+
+    public void setNo_telp_user(String no_telp_user) {
+        this.no_telp_user = no_telp_user;
+    }
+
     public String getTanggal_setor() {
         return tanggal_setor;
     }
@@ -80,12 +69,12 @@ public class RequestSetorUser {
         this.tanggal_setor = tanggal_setor;
     }
 
-    public String getFoto_bukti() {
-        return foto_bukti;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setFoto_bukti(String foto_bukti) {
-        this.foto_bukti = foto_bukti;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getJenis_pembayaran() {

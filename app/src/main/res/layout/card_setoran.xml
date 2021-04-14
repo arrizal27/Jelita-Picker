@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pengepul"
+                    android:text="Nama User"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
                 <TextView
@@ -152,6 +152,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="Total Bayar"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+            <TextView
+                android:id="@+id/txt_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:visibility="visible"
+                android:text="Dua ribu saja"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Alasan Penolakan"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
             <TextView
@@ -162,6 +176,26 @@
                 android:visibility="visible"
                 android:text="Stok sembako yang anda pilih sedang dalam keadaan kehabisan stok."
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_tolak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:text="Tolak" />
+
+                <Button
+                    android:id="@+id/btn_acc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btn_tolak"
+                    android:text="TERIMA" />
+            </RelativeLayout>
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -18,13 +18,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.smkn4bdg.jelitapicker.Models.RequestSetorPengepul;
 import com.smkn4bdg.jelitapicker.Models.RequestSetorUser;
 import com.smkn4bdg.jelitapicker.R;
 
 import java.util.ArrayList;
 
 public class DitolakFragment extends Fragment {
-    private ArrayList<RequestSetorUser> dataRequest;
+    private ArrayList<RequestSetorPengepul> dataRequest;
     private RecyclerView recyclerView;
 
     public DitolakFragment() {
@@ -45,20 +46,19 @@ public class DitolakFragment extends Fragment {
         return view;
     }
     private void getdata(){
-        final DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("requestSetorUser");
+        final DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("requestSetorPengepul");
         FirebaseUser auth = FirebaseAuth.getInstance().getCurrentUser();
         String id = auth.getUid();
-        Query q = FirebaseDatabase.getInstance().getReference("requestSetorUser").child(id).orderByChild("status_ditolak").equalTo(true);
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbref.child(id).orderByChild("status").equalTo("Ditolak").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for (DataSnapshot datasnap : snapshot.getChildren()){
-                        RequestSetorUser requestSetorUser = datasnap.getValue(RequestSetorUser.class);
-                        dataRequest.add(requestSetorUser);
+                        RequestSetorPengepul requestSetorPengepul = datasnap.getValue(RequestSetorPengepul.class);
+                        dataRequest.add(requestSetorPengepul);
                     }
-                    DitolakAdapter ditolakAdapter = new DitolakAdapter(dataRequest);
-                    recyclerView.setAdapter(ditolakAdapter);
+                    AllAdapter pendingAdapter = new AllAdapter(dataRequest);
+                    recyclerView.setAdapter(pendingAdapter);
                 }
             }
 
