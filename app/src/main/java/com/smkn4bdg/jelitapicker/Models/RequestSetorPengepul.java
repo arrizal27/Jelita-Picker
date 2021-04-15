@@ -7,7 +7,7 @@ public class RequestSetorPengepul {
     private String no_telp_user;
     private String tanggal_setor;
     private String foto;
-    private String jenis_pembayaran;
+    private String jenis_bayar;
     private String alasantolak;
     private double total_uang;
     private String status;
@@ -16,14 +16,14 @@ public class RequestSetorPengepul {
 
     }
 
-    public RequestSetorPengepul(String id, String nama_user, String alamat_user, String no_telp_user, String tanggal_setor, String foto, String jenis_pembayaran, String alasantolak, double total_uang, String status) {
+    public RequestSetorPengepul(String id, String nama_user, String alamat_user, String no_telp_user, String tanggal_setor, String foto, String jenis_bayar, String alasantolak, double total_uang, String status) {
         this.id = id;
         this.nama_user = nama_user;
         this.alamat_user = alamat_user;
         this.no_telp_user = no_telp_user;
         this.tanggal_setor = tanggal_setor;
         this.foto = foto;
-        this.jenis_pembayaran = jenis_pembayaran;
+        this.jenis_bayar = jenis_bayar;
         this.alasantolak = alasantolak;
         this.total_uang = total_uang;
         this.status = status;
@@ -77,12 +77,12 @@ public class RequestSetorPengepul {
         this.foto = foto;
     }
 
-    public String getJenis_pembayaran() {
-        return jenis_pembayaran;
+    public String getJenis_bayar() {
+        return jenis_bayar;
     }
 
-    public void setJenis_pembayaran(String jenis_pembayaran) {
-        this.jenis_pembayaran = jenis_pembayaran;
+    public void setJenis_bayar(String jenis_bayar) {
+        this.jenis_bayar = jenis_bayar;
     }
 
     public String getAlasantolak() {

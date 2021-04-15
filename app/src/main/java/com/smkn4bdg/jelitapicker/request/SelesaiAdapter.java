@@ -56,7 +56,7 @@ public class SelesaiAdapter extends RecyclerView.Adapter<SelesaiAdapter.Diterima
         holder.tvalamat.setText(requestSetorPengepul.getAlamat_user());
         holder.tvstatus.setText(requestSetorPengepul.getStatus());
         holder.tvtanggalsetor.setText(requestSetorPengepul.getTanggal_setor());
-        holder.tvjenispembayaran.setText(requestSetorPengepul.getJenis_pembayaran());
+        holder.tvjenispembayaran.setText(requestSetorPengepul.getJenis_bayar());
         holder.tvalasan.setText(requestSetorPengepul.getAlasantolak());
         holder.tvalasan.setVisibility(View.GONE);
         holder.txt_alasan.setVisibility(View.GONE);

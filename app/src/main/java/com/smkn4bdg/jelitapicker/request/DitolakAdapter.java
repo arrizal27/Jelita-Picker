@@ -56,7 +56,7 @@ public class DitolakAdapter extends RecyclerView.Adapter<DitolakAdapter.Diterima
         holder.tvalamat.setText(requestSetorPengepul.getAlamat_user());
         holder.tvstatus.setText(requestSetorPengepul.getStatus());
         holder.tvtanggalsetor.setText(requestSetorPengepul.getTanggal_setor());
-        holder.tvjenispembayaran.setText(requestSetorPengepul.getJenis_pembayaran());
+        holder.tvjenispembayaran.setText(requestSetorPengepul.getJenis_bayar());
         holder.tvalasan.setText(requestSetorPengepul.getAlasantolak());
         holder.tvtotal.setText(nm.format(requestSetorPengepul.getTotal_uang()));
         Picasso.get().load(requestSetorPengepul.getFoto()).into(holder.ivbukti);

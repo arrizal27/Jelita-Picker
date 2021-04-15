@@ -19,7 +19,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.smkn4bdg.jelitapicker.Models.Pengepul;
 import com.smkn4bdg.jelitapicker.Models.User;
 import com.smkn4bdg.jelitapicker.R;
 import com.smkn4bdg.jelitapicker.ui.WelcomePageActivity;
@@ -27,22 +29,27 @@ import com.smkn4bdg.jelitapicker.ui.WelcomePageActivity;
 public class ProfileActivity extends AppCompatActivity {
     MaterialButton back, editProfil;
     MaterialCardView btnLogout;
-    private DatabaseReference mdbUsers;
+    private DatabaseReference mdbPicker;
     private FirebaseDatabase mfirebaseInstance;
     private FirebaseAuth firebaseAuth;
-    private FirebaseUser mUser;
+    private FirebaseUser mPicker;
     private final String TAG = this.getClass().getName().toUpperCase();
     Context context;
-    TextView editPw, tvnama,tvkategori,tvusername, tvemail, tvpassword,tvalamat;
+    TextView editPw, tvnama,tvkategori,tvusername, tvemail, tvpassword,tvalamat, tvkota, tvkecamatan, tvkelurahan;
+    String id, jeniskel, role;
+    int poin, jmlminyak;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getdata();
-        findView();
         firebaseAuth = FirebaseAuth.getInstance();
+        mdbPicker = FirebaseDatabase.getInstance().getReference();
+        mPicker = firebaseAuth.getCurrentUser();
+
+        userInformation(mPicker.getUid());
+        findView();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,30 +84,35 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-    private void getdata(){
-        FirebaseApp.initializeApp(this);
-        mfirebaseInstance = FirebaseDatabase.getInstance();
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mdbUsers = mfirebaseInstance.getReference();
-        mdbUsers.child("users").addValueEventListener(new ValueEventListener() {
+    private void userInformation(String uID) {
+        final Query q = mdbPicker.child("pengepul").child(uID);
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot mdata : snapshot.getChildren()){
-                    if (mdata.child("id").getValue().equals(mUser.getUid())){
-                        tvnama.setText(mdata.child("nama").getValue(String.class).toUpperCase());
-                        tvkategori.setText(mdata.child("role").getValue(String.class));
-                        tvalamat.setText(mdata.child("alamat").getValue(String.class));
-                        tvemail.setText(mdata.child("email").getValue(String.class));
-                        tvusername.setText(mdata.child("username").getValue(String.class));
-                    }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Pengepul Pinfo = dataSnapshot.getValue(Pengepul.class);
+                    setData(Pinfo);
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+    }
+    private void setData(Pengepul info) {
+        id = info.getId();
+
+        tvnama.setText(info.getNama());
+        tvusername.setText(info.getUsername());
+        tvemail.setText(info.getEmail());
+        tvalamat.setText(info.getAlamat());
+        tvkota.setText(info.getKota());
+        tvkecamatan.setText(info.getKecamatan());
+        tvkelurahan.setText(info.getKelurahan());
+        jeniskel = info.getJenis_kel();
+
     }
 
     private void findView(){
@@ -114,5 +126,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvemail = findViewById(R.id.email);
         tvpassword = findViewById(R.id.pass);
         tvalamat = findViewById(R.id.alamat);
+        tvkota = findViewById(R.id.tvkota);
+        tvkecamatan = findViewById(R.id.tvkecamatan);
+        tvkelurahan = findViewById(R.id.tvkelurahan);
     }
 }
