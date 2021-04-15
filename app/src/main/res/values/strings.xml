@@ -5,9 +5,8 @@
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
 
-    <string-array name="roles">
-        <item>Hotel dan Restaurant</item>
-        <item>Pabrik</item>
-        <item>Rumah Tangga</item>
+    <string-array name="jk">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
     </string-array>
 </resources>

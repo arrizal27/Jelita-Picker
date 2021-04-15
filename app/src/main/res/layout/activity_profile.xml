@@ -131,6 +131,21 @@
                 android:text="smkn4bdg"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/grey" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Jenis Kelamin"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/jk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="wo"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/grey" />
 
             <TextView
                 android:layout_width="match_parent"

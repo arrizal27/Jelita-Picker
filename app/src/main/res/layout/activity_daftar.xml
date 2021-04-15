@@ -58,6 +58,18 @@
                     android:backgroundTint="@android:color/transparent"
                     android:id="@+id/txt_nama"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow_dark"
+                android:text="Jenis Kelamin"
+                android:layout_marginTop="16dp"/>
+
+            <Spinner
+                android:id="@+id/dropdown_jk"
+                android:entries="@array/jk"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -96,6 +108,18 @@
                     android:backgroundTint="@android:color/transparent"
                     android:id="@+id/email"
                     android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="No Telepon"
+                    android:inputType="number"
+                    android:backgroundTint="@android:color/transparent"
+                    android:id="@+id/txt_notelp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

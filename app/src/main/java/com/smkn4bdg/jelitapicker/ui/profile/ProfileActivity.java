@@ -35,8 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser mPicker;
     private final String TAG = this.getClass().getName().toUpperCase();
     Context context;
-    TextView editPw, tvnama,tvkategori,tvusername, tvemail, tvpassword,tvalamat, tvkota, tvkecamatan, tvkelurahan;
-    String id, jeniskel, role;
+    TextView editPw, tvnama,tvkategori,tvusername, tvemail, tvpassword,tvalamat, tvkota, tvkecamatan, tvkelurahan,tvjk;
+    String id, role;
     int poin, jmlminyak;
 
 
@@ -103,7 +103,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
     private void setData(Pengepul info) {
         id = info.getId();
-
         tvnama.setText(info.getNama());
         tvusername.setText(info.getUsername());
         tvemail.setText(info.getEmail());
@@ -111,7 +110,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvkota.setText(info.getKota());
         tvkecamatan.setText(info.getKecamatan());
         tvkelurahan.setText(info.getKelurahan());
-        jeniskel = info.getJenis_kel();
+        tvjk.setText(info.getJenis_kel());
+
 
     }
 
@@ -128,6 +128,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvalamat = findViewById(R.id.alamat);
         tvkota = findViewById(R.id.tvkota);
         tvkecamatan = findViewById(R.id.tvkecamatan);
+        tvjk = findViewById(R.id.jk);
         tvkelurahan = findViewById(R.id.tvkelurahan);
     }
 }
