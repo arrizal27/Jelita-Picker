@@ -94,7 +94,7 @@ public class DiterimaFragment extends Fragment {
                         RequestSetorPengepul requestSetorPengepul = datasnap.getValue(RequestSetorPengepul.class);
                         dataRequest.add(requestSetorPengepul);
                     }
-                    AllAdapter diterimaAdapter = new AllAdapter(dataRequest);
+                    DiterimaAdapter diterimaAdapter = new DiterimaAdapter(dataRequest);
                     recyclerView.setAdapter(diterimaAdapter);
                     diterimaAdapter.notifyDataSetChanged();
                 }

@@ -112,11 +112,9 @@ public class MainActivity extends AppCompatActivity {
         fotoProfil = findViewById(R.id.img_profil);
         username = findViewById(R.id.username);
         kecamatan = findViewById(R.id.kecamatan);
-        btnJerigen = findViewById(R.id.btn_jerigen);
         btnProfil = findViewById(R.id.btn_profil);
         btnHelp = findViewById(R.id.btn_help);
         btnRiwayat = findViewById(R.id.btn_riwayat);
-        btnPoin = findViewById(R.id.btn_poin);
     }
 
 }

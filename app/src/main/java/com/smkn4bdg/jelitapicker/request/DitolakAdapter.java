@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.smkn4bdg.jelitapicker.Models.RequestSetorPengepul;
 import com.smkn4bdg.jelitapicker.Models.RequestSetorUser;
+import com.smkn4bdg.jelitapicker.Models.User;
 import com.smkn4bdg.jelitapicker.R;
 import com.smkn4bdg.jelitapicker.ui.main.MainActivity;
 import com.squareup.picasso.Picasso;
@@ -27,10 +28,14 @@ import com.squareup.picasso.Picasso;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class AllAdapter extends RecyclerView.Adapter<AllAdapter.DiterimaViewHolder> {
+public class DitolakAdapter extends RecyclerView.Adapter<DitolakAdapter.DiterimaViewHolder> {
     private ArrayList<RequestSetorPengepul> dataSetor;
+    FirebaseDatabase dbUser = FirebaseDatabase.getInstance();
+    FirebaseDatabase dbRef = FirebaseDatabase.getInstance();
+    FirebaseDatabase dbReq = FirebaseDatabase.getInstance();
 
-    public AllAdapter(ArrayList<RequestSetorPengepul> dataSetor){
+
+    public DitolakAdapter(ArrayList<RequestSetorPengepul> dataSetor){
         this.dataSetor = dataSetor;
     }
 
@@ -55,29 +60,9 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.DiterimaViewHold
         holder.tvalasan.setText(requestSetorPengepul.getAlasantolak());
         holder.tvtotal.setText(nm.format(requestSetorPengepul.getTotal_uang()));
         Picasso.get().load(requestSetorPengepul.getFoto()).into(holder.ivbukti);
-        holder.btn_acc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (requestSetorPengepul.getStatus().equals("Pending")) {
-                    FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
-                            .child(auth.getUid()).child(requestSetorPengepul.getId())
-                            .child("status").setValue("Diterima");
-                }
-                else if (requestSetorPengepul.getStatus().equals("Diterima")) {
-                    FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
-                            .child(auth.getUid()).child(requestSetorPengepul.getId())
-                            .child("status").setValue("Selesai");
-                }
-            }
-        });
-        holder.btn_tolak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
-                        .child(auth.getUid()).child(requestSetorPengepul.getId())
-                        .child("status").setValue("Ditolak");
-            }
-        });
+        holder.btn_acc.setVisibility(View.GONE);
+        holder.btn_tolak.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -86,7 +71,7 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.DiterimaViewHold
     }
 
     public class DiterimaViewHolder extends RecyclerView.ViewHolder {
-        TextView tvpengepul,tvtelepon,tvalamat,tvtanggalsetor,tvjenispembayaran,tvstatus,tvalasan,tvtotal;
+        TextView tvpengepul,tvtelepon,tvalamat,tvtanggalsetor,tvjenispembayaran,tvstatus,tvalasan,tvtotal,txt_alasan;
         ImageView ivbukti;
         Button btn_tolak,btn_acc;
         public DiterimaViewHolder(@NonNull View itemView) {
@@ -98,6 +83,7 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.DiterimaViewHold
             tvjenispembayaran = itemView.findViewById(R.id.txt_jenis_bayar);
             tvstatus = itemView.findViewById(R.id.txt_status);
             tvalasan = itemView.findViewById(R.id.txt_alasan);
+            txt_alasan = itemView.findViewById(R.id.tit_alasan);
             tvtotal = itemView.findViewById(R.id.txt_total);
             ivbukti = itemView.findViewById(R.id.foto_bukti);
             btn_tolak = itemView.findViewById(R.id.btn_tolak);

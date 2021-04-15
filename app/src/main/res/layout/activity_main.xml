@@ -258,34 +258,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:gravity="center"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp">
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/btn_jerigen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        android:layout_gravity="center"
-                        app:contentPadding="12dp"
-                        app:cardElevation="0dp"
-                        android:clickable="true"
-                        app:cardBackgroundColor="@color/yellow">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_img_oil_white" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Jerigen"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        android:gravity="center"/>
-                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -315,35 +288,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:gravity="center"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp">
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/btn_poin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        android:layout_gravity="center"
-                        app:contentPadding="8dp"
-                        app:cardElevation="0dp"
-                        android:clickable="true"
-                        app:cardBackgroundColor="@color/yellow">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_coin" />
-                    </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Request"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

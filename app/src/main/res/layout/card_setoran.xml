@@ -163,6 +163,7 @@
                 android:text="Dua ribu saja"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
             <TextView
+                android:id="@+id/tit_alasan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

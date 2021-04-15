@@ -16,10 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.smkn4bdg.jelitapicker.Models.RequestSetorPengepul;
-import com.smkn4bdg.jelitapicker.Models.RequestSetorUser;
 import com.smkn4bdg.jelitapicker.R;
 
 import java.util.ArrayList;
@@ -57,8 +55,8 @@ public class DitolakFragment extends Fragment {
                         RequestSetorPengepul requestSetorPengepul = datasnap.getValue(RequestSetorPengepul.class);
                         dataRequest.add(requestSetorPengepul);
                     }
-                    AllAdapter pendingAdapter = new AllAdapter(dataRequest);
-                    recyclerView.setAdapter(pendingAdapter);
+                    DitolakAdapter ditolakAdapter = new DitolakAdapter(dataRequest);
+                    recyclerView.setAdapter(ditolakAdapter);
                 }
             }
 
