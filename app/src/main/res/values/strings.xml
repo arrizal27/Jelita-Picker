@@ -9,4 +9,10 @@
         <item>Laki-laki</item>
         <item>Perempuan</item>
     </string-array>
+    <string name="daftar">Daftar dengan mengisi form daftar(nama,username,password,nohp,dan role)</string>
+    <string name="login">Login dengan memasukan nohp serta password yang sudah di daftarkan sebelumnya</string>
+    <string name="ceksetor">Di Menu Utama klik tombol "Request" untuk melihat apkakah ada request untuk setor dari user</string>
+    <string name="accsetor">Setelah mengecek dan ada request dati user, pilihlah mana yang memenuhi kriteria dan layak untuk diterima, jika tidak maka tolak </string>
+    <string name="jemput">Setelah memilih setoran yang layak, maka jemput ke alamat user yang tertera </string>
+    <string name="done">Setelah minyak diterima dan transaksi selesai, maka tekan selesai pada halaman setoran</string>
 </resources>

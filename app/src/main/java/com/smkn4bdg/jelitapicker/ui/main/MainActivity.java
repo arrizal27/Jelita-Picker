@@ -1,8 +1,5 @@
 package com.smkn4bdg.jelitapicker.ui.main;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -21,10 +21,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.smkn4bdg.jelitapicker.request.RiwayatActivity;
-import com.smkn4bdg.jelitapicker.Models.Pengepul;
-import com.smkn4bdg.jelitapicker.ui.profile.ProfileActivity;
+import com.smkn4bdg.jelitapicker.Models.User;
 import com.smkn4bdg.jelitapicker.R;
+import com.smkn4bdg.jelitapicker.request.RiwayatActivity;
+import com.smkn4bdg.jelitapicker.ui.help.HelpActivity;
+import com.smkn4bdg.jelitapicker.ui.profile.ProfileActivity;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mdbPicker;
@@ -32,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mfirebaseauth;
     private FirebaseUser mPicker;
     private static final String  PICKER = "pengepul";
+    public static final String EXTRA_POINT = "";
     private final String TAG = this.getClass().getName().toUpperCase();
-    Pengepul pengepul = new Pengepul();
-//    Intent intent = getIntent();
+    String pointed;
+    User user = new User();
+    //    Intent intent = getIntent();
 //    String email = intent.getStringExtra("email");
     ImageView fotoProfil;
-    TextView username, poin, kategori, tabunganMinyak, kapasitasMax, kecamatan;
+    TextView username, poin, kategori, tabunganMinyak, kapasitasMax;
     ProgressBar progressBarMinyak;
 
     MaterialButton btnNabung;
@@ -51,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
 //        String email =  mfirebaseauth.getCurrentUser().getEmail();
         findView();
         getdata();
+
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, HelpActivity.class);
+                startActivity(i);
+            }
+        });
 
         btnProfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         btnProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(profile);
             }
         });
+
     }
 
     private void getdata(){
@@ -91,9 +103,39 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot mdatasnap : snapshot.getChildren()){
                     if (mdatasnap.child("id").getValue().equals(mPicker.getUid())){
                         System.out.println(mdatasnap.child("username").getValue(String.class));
-                        username.setText(mdatasnap.child("nama").getValue(String.class).toUpperCase());
-                        pengepul.setEmail(mdatasnap.child("email").getValue(String.class));
-                        kecamatan.setText(mdatasnap.child("kecamatan").getValue(String.class));
+                        username.setText(mdatasnap.child("username").getValue(String.class).toUpperCase());
+                        Picasso.get().load(mdatasnap.child("foto").getValue(String.class)).into(fotoProfil);
+//                        pointed = mdatasnap.child("poin").getValue().toString() + " Poin";
+//                        tabunganMinyak.setText(String.valueOf(mdatasnap.child("jml_minyak").getValue() + " Liter"));
+//
+//                        if(mdatasnap.child("role").getValue().toString().equals("Rumah Tangga")){
+//                            kapasitasMax.setText(Integer.valueOf(5) + " Liter");
+//                            progressBarMinyak.setMax(5);
+//                        }
+//                        else if (mdatasnap.child("role").getValue().toString().equals("Pedagang")){
+//                            kapasitasMax.setText(Integer.valueOf(10) + " Liter");
+//                            progressBarMinyak.setMax(10);
+//                        }
+//                        else if (mdatasnap.child("role").getValue().toString().equals("Cafe dan Rumah Makan")){
+//                            kapasitasMax.setText(Integer.valueOf(15) + " Liter");
+//                            progressBarMinyak.setMax(15);
+//                        }
+//                        else if (mdatasnap.child("role").getValue().toString().equals("Hotel dan Penginapan")){
+//                            kapasitasMax.setText(Integer.valueOf(20) + " Liter");
+//                            progressBarMinyak.setMax(20);
+//                        }
+//                        else{
+//
+//                        }
+//
+//                        progressBarMinyak.setProgress(Integer.valueOf(mdatasnap.child("jml_minyak").getValue().toString()));
+                        user.setEmail(mdatasnap.child("email").getValue(String.class));
+
+
+
+//                        tabunganMinyak.setText(mdatasnap.child("jml_minyak").getValue(String.class));
+//                        Log.d(username.toString(), "kategori");
+                        user.setEmail(mdatasnap.child("username").getValue(String.class));
                         break;
                     }
                 }
@@ -111,10 +153,13 @@ public class MainActivity extends AppCompatActivity {
     private void findView() {
         fotoProfil = findViewById(R.id.img_profil);
         username = findViewById(R.id.username);
-        kecamatan = findViewById(R.id.kecamatan);
+        tabunganMinyak = findViewById(R.id.txt_tabungan);
+        kapasitasMax = findViewById(R.id.txt_maks);
+        progressBarMinyak = findViewById(R.id.progres_nabung);
         btnProfil = findViewById(R.id.btn_profil);
         btnHelp = findViewById(R.id.btn_help);
         btnRiwayat = findViewById(R.id.btn_riwayat);
+
     }
 
 }
