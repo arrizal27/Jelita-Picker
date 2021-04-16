@@ -83,14 +83,14 @@
                 android:layout_height="85dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="16dp"
-                android:paddingVertical="4dp">
+                android:paddingVertical="2dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_profil"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_circle_profil"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     android:src="@drawable/ic_outline_help_outline_24" />
             </FrameLayout>
 
@@ -103,10 +103,10 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/kategori"
+                android:id="@+id/role"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pengepul"
+                android:text="Hotel dan Penginapan"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/grey" />
 

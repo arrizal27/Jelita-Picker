@@ -96,6 +96,18 @@
                     android:backgroundTint="@android:color/transparent"
                     android:id="@+id/txt_password"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="No Telepon"
+                    android:inputType="number"
+                    android:backgroundTint="@android:color/transparent"
+                    android:id="@+id/txt_notelp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -109,18 +121,7 @@
                     android:id="@+id/email"
                     android:inputType="textEmailAddress"/>
             </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="No Telepon"
-                    android:inputType="number"
-                    android:backgroundTint="@android:color/transparent"
-                    android:id="@+id/txt_notelp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -173,7 +174,6 @@
                     android:id="@+id/kelurahan"
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
         </LinearLayout>

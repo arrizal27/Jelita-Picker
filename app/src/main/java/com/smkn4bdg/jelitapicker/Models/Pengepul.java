@@ -4,7 +4,7 @@ public class Pengepul {
     private String id;
     private String nama;
     private String foto;
-    private String jenis_kel;
+    private String jenis_kelamin;
     private String alamat;
     private String kota;
     private String kelurahan;
@@ -18,11 +18,11 @@ public class Pengepul {
 
     }
 
-    public Pengepul(String id, String nama, String foto, String jenis_kel, String alamat, String kota, String kelurahan, String kecamatan, String username, String password, String email, String no_telp) {
+    public Pengepul(String id, String nama, String foto, String jenis_kelamin, String alamat, String kota, String kelurahan, String kecamatan, String username, String password, String email, String no_telp) {
         this.id = id;
         this.nama = nama;
         this.foto = foto;
-        this.jenis_kel = jenis_kel;
+        this.jenis_kelamin = jenis_kelamin;
         this.alamat = alamat;
         this.kota = kota;
         this.kelurahan = kelurahan;
@@ -57,12 +57,12 @@ public class Pengepul {
         this.foto = foto;
     }
 
-    public String getJenis_kel() {
-        return jenis_kel;
+    public String getJenis_kelamin() {
+        return jenis_kelamin;
     }
 
-    public void setJenis_kel(String jenis_kel) {
-        this.jenis_kel = jenis_kel;
+    public void setJenis_kelamin(String jenis_kelamin) {
+        this.jenis_kelamin = jenis_kelamin;
     }
 
     public String getAlamat() {

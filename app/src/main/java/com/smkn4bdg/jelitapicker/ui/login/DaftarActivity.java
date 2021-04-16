@@ -1,18 +1,17 @@
 package com.smkn4bdg.jelitapicker.ui.login;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,8 +32,8 @@ public class DaftarActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference dbPicker;
     private static final String TAG = "DaftarActivity";
-    TextInputEditText nama,username,pass,emailhp, alamat, kota, kecamatan, kelurahan,notlp;
-    Spinner jk;
+    TextInputEditText nama,username,pass,emailhp, alamat, kota, kecamatan, kelurahan, no_telp;
+    Spinner role,jk;
     Button btndaftar;
     ImageButton back;
 
@@ -73,9 +72,9 @@ public class DaftarActivity extends AppCompatActivity {
         back = findViewById(R.id.back_daftar);
         alamat = findViewById(R.id.alamat);
         kota = findViewById(R.id.kota);
+        no_telp = findViewById(R.id.txt_notelp);
         kecamatan = findViewById(R.id.kecamatan);
         kelurahan = findViewById(R.id.kelurahan);
-        notlp = findViewById(R.id.txt_notelp);
 
         dbPicker = FirebaseDatabase.getInstance().getReference("pengepul");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -88,18 +87,13 @@ public class DaftarActivity extends AppCompatActivity {
         String usernameFinal = username.getText().toString();
         String passFinal = pass.getText().toString();
         String emailhpFinal = emailhp.getText().toString();
+        String roleFinal = role.getSelectedItem().toString();
         String jkFinal = jk.getSelectedItem().toString();
-        String tlpFinal = notlp.getText().toString();
+        String telpFinal = no_telp.getText().toString();
         String alamatFinal = alamat.getText().toString();
         String kotaFinal = kota.getText().toString();
         String kecamatanFinal = kecamatan.getText().toString();
         String kelurahanFinal = kelurahan.getText().toString();
-
-        //data default
-        String jenisKelamin = "tidak disebutkan";
-        String noTlp = "08****";
-        int jml_minyak = 0;
-        int poin = 0;
 
 
         if (TextUtils.isEmpty(namaFinal)) {
@@ -112,6 +106,10 @@ public class DaftarActivity extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(passFinal)) {
             showToast("Enter Your Password!");
+            return;
+        }
+        if (TextUtils.isEmpty(telpFinal)) {
+            showToast("Enter Your Phone Number!");
             return;
         }
         if (TextUtils.isEmpty(emailhpFinal)) {
@@ -134,10 +132,10 @@ public class DaftarActivity extends AppCompatActivity {
             showToast("Enter Kelurahan!");
             return;
         }
-//        if (roleFinal == null) {
-//            showToast("Enter Your Roles!");
-//            return;
-//        }
+        if (roleFinal == null) {
+            showToast("Enter Your Roles!");
+            return;
+        }
 
         dbPicker.orderByChild("email").equalTo(emailhpFinal).addValueEventListener(new ValueEventListener() {
             @Override
@@ -146,25 +144,38 @@ public class DaftarActivity extends AppCompatActivity {
                     showToast("Email Already Exist!");
                 }
                 else{
-                    firebaseAuth.createUserWithEmailAndPassword(emailhpFinal, passFinal)
-                            .addOnCompleteListener(DaftarActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Log.d(TAG, "New user registration: " + task.isSuccessful());
-                                    if (!task.isSuccessful()) {
-                                        DaftarActivity.this.showToast("Authentication failed. " + task.getException());
-                                    } else {
-                                        String id = firebaseAuth.getUid();
-                                        Pengepul pengepul = new Pengepul(id, namaFinal,"", jkFinal, alamatFinal,kotaFinal,
-                                                kelurahanFinal, kecamatanFinal, usernameFinal, passFinal
-                                                , emailhpFinal, tlpFinal);
-                                        dbPicker.child(id).setValue(pengepul);
-                                        DaftarActivity.this.startActivity(new Intent(DaftarActivity.this, DaftarBerhasilActivity.class));
-                                        DaftarActivity.this.finish();
+                    dbPicker.orderByChild("kecamatan").equalTo(kecamatanFinal).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                showToast("Pengepul di kecamatan ini sudah ada!");
+                            }
+                            else{
+                                firebaseAuth.createUserWithEmailAndPassword(emailhpFinal, passFinal)
+                                        .addOnCompleteListener(DaftarActivity.this, new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                Log.d(TAG, "New user registration: " + task.isSuccessful());
+                                                if (!task.isSuccessful()) {
+                                                    DaftarActivity.this.showToast("Authentication failed. " + task.getException());
+                                                } else {
+                                                    String id = firebaseAuth.getUid();
+                                                    Pengepul pengepul = new Pengepul(id, namaFinal,"", jkFinal, alamatFinal, kotaFinal,kelurahanFinal,
+                                                            kecamatanFinal, usernameFinal, passFinal, emailhpFinal, telpFinal);
+                                                    dbPicker.child(id).setValue(pengepul);
+                                                    DaftarActivity.this.startActivity(new Intent(DaftarActivity.this, DaftarBerhasilActivity.class));
+                                                    DaftarActivity.this.finish();
 
-                                    }
-                                }
-                            });
+                                                }
+                                            }
+                                        });
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
 

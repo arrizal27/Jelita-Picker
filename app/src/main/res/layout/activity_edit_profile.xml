@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ubah Proflile"
+                android:text="Ubah Profile"
                 android:layout_marginLeft="16dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
         </LinearLayout>
@@ -38,8 +38,23 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/topedt"
             app:layout_constraintBottom_toTopOf="@id/lin">
-
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Foto Profile"/>
+            <ImageView
+                android:id="@+id/gbr"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:src="@drawable/ic_baseline_person_24">
+            </ImageView>
+            <Button
+                android:id="@+id/btn_gbr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih gambar"></Button>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,6 +69,8 @@
                     android:background="@android:color/transparent"
                     android:text="smkn4bdg" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
