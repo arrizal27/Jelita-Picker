@@ -108,7 +108,12 @@ public class ProfileActivity extends AppCompatActivity {
         tvemail.setText(info.getEmail());
         tvalamat.setText(info.getAlamat());
         tvkota.setText(info.getKota());
-        Picasso.get().load(info.getFoto()).into(imgProfile);
+        if (info.getFoto().isEmpty()){
+
+        }
+        else{
+            Picasso.get().load(info.getFoto()).into(imgProfile);
+        }
         tvkecamatan.setText(info.getKecamatan());
         tvkelurahan.setText(info.getKelurahan());
         tvjk.setText(info.getJenis_kelamin());

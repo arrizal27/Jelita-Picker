@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.smkn4bdg.jelitapicker.Models.Pengepul;
 import com.smkn4bdg.jelitapicker.Models.User;
 import com.smkn4bdg.jelitapicker.R;
 import com.smkn4bdg.jelitapicker.request.RiwayatActivity;
@@ -37,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_POINT = "";
     private final String TAG = this.getClass().getName().toUpperCase();
     String pointed;
-    User user = new User();
+    Pengepul pengepul = new Pengepul();
     //    Intent intent = getIntent();
 //    String email = intent.getStringExtra("email");
     ImageView fotoProfil;
-    TextView username, poin, kategori, tabunganMinyak, kapasitasMax;
+    TextView username, poin, kategori, tabunganMinyak, kapasitasMax, kecamatan;
     ProgressBar progressBarMinyak;
 
     MaterialButton btnNabung;
@@ -104,7 +105,13 @@ public class MainActivity extends AppCompatActivity {
                     if (mdatasnap.child("id").getValue().equals(mPicker.getUid())){
                         System.out.println(mdatasnap.child("username").getValue(String.class));
                         username.setText(mdatasnap.child("username").getValue(String.class).toUpperCase());
-                        Picasso.get().load(mdatasnap.child("foto").getValue(String.class)).into(fotoProfil);
+                        if (mdatasnap.child("foto").getValue().toString().isEmpty()){
+
+                        }
+                        else{
+                            Picasso.get().load(mdatasnap.child("foto").getValue(String.class)).into(fotoProfil);
+                        }
+                        kecamatan.setText(mdatasnap.child("kecamatan").getValue(String.class));
 //                        pointed = mdatasnap.child("poin").getValue().toString() + " Poin";
 //                        tabunganMinyak.setText(String.valueOf(mdatasnap.child("jml_minyak").getValue() + " Liter"));
 //
@@ -129,13 +136,13 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //
 //                        progressBarMinyak.setProgress(Integer.valueOf(mdatasnap.child("jml_minyak").getValue().toString()));
-                        user.setEmail(mdatasnap.child("email").getValue(String.class));
+                        pengepul.setEmail(mdatasnap.child("email").getValue(String.class));
 
 
 
 //                        tabunganMinyak.setText(mdatasnap.child("jml_minyak").getValue(String.class));
 //                        Log.d(username.toString(), "kategori");
-                        user.setEmail(mdatasnap.child("username").getValue(String.class));
+                        pengepul.setEmail(mdatasnap.child("username").getValue(String.class));
                         break;
                     }
                 }
@@ -158,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
         progressBarMinyak = findViewById(R.id.progres_nabung);
         btnProfil = findViewById(R.id.btn_profil);
         btnHelp = findViewById(R.id.btn_help);
+        kecamatan = findViewById(R.id.kecamatan);
         btnRiwayat = findViewById(R.id.btn_riwayat);
 
     }

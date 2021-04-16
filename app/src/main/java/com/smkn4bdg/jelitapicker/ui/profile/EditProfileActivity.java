@@ -35,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import com.smkn4bdg.jelitapicker.Models.Pengepul;
 import com.smkn4bdg.jelitapicker.Models.User;
 import com.smkn4bdg.jelitapicker.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
@@ -171,6 +172,12 @@ public class EditProfileActivity extends AppCompatActivity {
         kecamatan.setText(info.getKecamatan());
         kelurahan.setText(info.getKelurahan());
         jeniskel = info.getJenis_kelamin();
+        if (info.getFoto().isEmpty()){
+
+        }
+        else{
+            Picasso.get().load(info.getFoto()).into(gbr);
+        }
 
     }
 
