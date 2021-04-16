@@ -27,8 +27,10 @@
         <activity android:name=".ui.login.DaftarActivity" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
-        <activity android:name=".ui.nabung.NabungActivity" />
-        <activity android:name=".ui.setor.SetorActivity" />
+        <activity android:name=".ui.help.HelpActivity"/>
+        <activity android:name=".ui.help.AboutActivity"/>
+        <activity android:name=".ui.help.QuestionActivity"/>
+        <activity android:name=".ui.help.TutorialActivity"/>
         <activity android:name=".request.RiwayatActivity" />
         <activity android:name=".ui.setor.SetorBerhasilActivity" />
         <!--        <activity android:name=".PengepulActivity" />-->
