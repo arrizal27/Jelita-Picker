@@ -75,7 +75,6 @@ public class DaftarActivity extends AppCompatActivity {
         no_telp = findViewById(R.id.txt_notelp);
         kecamatan = findViewById(R.id.kecamatan);
         kelurahan = findViewById(R.id.kelurahan);
-
         dbPicker = FirebaseDatabase.getInstance().getReference("pengepul");
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -87,7 +86,6 @@ public class DaftarActivity extends AppCompatActivity {
         String usernameFinal = username.getText().toString();
         String passFinal = pass.getText().toString();
         String emailhpFinal = emailhp.getText().toString();
-        String roleFinal = role.getSelectedItem().toString();
         String jkFinal = jk.getSelectedItem().toString();
         String telpFinal = no_telp.getText().toString();
         String alamatFinal = alamat.getText().toString();
@@ -132,10 +130,7 @@ public class DaftarActivity extends AppCompatActivity {
             showToast("Enter Kelurahan!");
             return;
         }
-        if (roleFinal == null) {
-            showToast("Enter Your Roles!");
-            return;
-        }
+
 
         dbPicker.orderByChild("email").equalTo(emailhpFinal).addValueEventListener(new ValueEventListener() {
             @Override

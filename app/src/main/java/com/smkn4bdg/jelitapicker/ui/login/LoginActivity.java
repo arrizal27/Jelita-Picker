@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smkn4bdg.jelitapicker.Models.User;
 import com.smkn4bdg.jelitapicker.Models.Pengepul;
 import com.smkn4bdg.jelitapicker.R;
@@ -100,28 +103,45 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        //login user
-        firebaseAuth.signInWithEmailAndPassword(usernameFinal, passFinal)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+        dbPicker.orderByChild("email").equalTo(usernameFinal).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    //login user
+                    firebaseAuth.signInWithEmailAndPassword(usernameFinal, passFinal)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (!task.isSuccessful()) {
+                                    if (!task.isSuccessful()) {
 
-                            if (passFinal.length() < 6) {
-                                pass.setError(LoginActivity.this.getString(R.string.minimum_password));
-                            } else {
-                                Toast.makeText(LoginActivity.this, LoginActivity.this.getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
-                            }
+                                        if (passFinal.length() < 6) {
+                                            pass.setError(LoginActivity.this.getString(R.string.minimum_password));
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, LoginActivity.this.getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
+                                        }
 
-                        } else {
-                            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            LoginActivity.this.finish();
-                            pengepul.setEmail(usernameFinal);
-                            pengepul.setPassword(passFinal);
-                        }
-                    }
-                });
+                                    } else {
+                                        LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        LoginActivity.this.finish();
+                                        pengepul.setEmail(usernameFinal);
+                                        pengepul.setPassword(passFinal);
+                                    }
+                                }
+                            });
+                }
+                else{
+                    Toast.makeText(LoginActivity.this.getApplicationContext(),"Data tidak ditemukan",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LoginActivity.this.getApplicationContext(),"Data tidak ditemukan",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
+
 
     }
 
