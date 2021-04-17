@@ -77,7 +77,6 @@ public class DaftarActivity extends AppCompatActivity {
         no_telp = findViewById(R.id.txt_notelp);
         kecamatan = findViewById(R.id.kecamatan);
         kelurahan = findViewById(R.id.kelurahan);
-
         dbPicker = FirebaseDatabase.getInstance().getReference("pengepul");
         firebaseAuth = FirebaseAuth.getInstance();
 

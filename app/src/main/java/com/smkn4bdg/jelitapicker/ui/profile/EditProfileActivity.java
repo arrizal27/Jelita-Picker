@@ -2,6 +2,7 @@ package com.smkn4bdg.jelitapicker.ui.profile;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +40,7 @@ import com.smkn4bdg.jelitapicker.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.UUID;
 
 public class EditProfileActivity extends AppCompatActivity {
@@ -50,7 +53,7 @@ public class EditProfileActivity extends AppCompatActivity {
     TextInputEditText nama, username, email, notelp, alamat, kota, kelurahan, kecamatan;
     String id, jeniskel, role;
     Button btn_gbr;
-    private Uri imageUri;
+    private Uri imageUri = Uri.parse("dummy");
     private StorageReference reference;
     ImageView gbr;
     int poin, jmlminyak;
@@ -99,46 +102,51 @@ public class EditProfileActivity extends AppCompatActivity {
                 //Lokasi lengkap dimana gambar akan disimpan
                 String namaFile = UUID.randomUUID()+".jpg";
                 String pathImage = "File/"+namaFile;
-
-                UploadTask uploadTask = reference.child(pathImage).putBytes(bytes);
-                final StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-                uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                File f = new File(pathImage);
+                imageUri = Uri.fromFile(f);
+                if (imageUri.toString().equals("dummy")) {
+                    Toast.makeText(EditProfileActivity.this,"Tolong upload ulang gambar!", Toast.LENGTH_LONG).show();
+                } else {
+                    UploadTask uploadTask = reference.child(pathImage).putBytes(bytes);
+                    final StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+                    uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
 //                        progressBar.setVisibility(View.VISIBLE);
-                    }
-                });
+                        }
+                    });
 
-                fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String image = uri.toString();
-                                pengepul.setNama(nama.getText().toString());
-                                pengepul.setUsername(username.getText().toString());
-                                pengepul.setNo_telp(notelp.getText().toString());
-                                pengepul.setAlamat(alamat.getText().toString());
-                                pengepul.setKota(kota.getText().toString());
-                                pengepul.setEmail(email.getText().toString());
-                                pengepul.setKecamatan(kecamatan.getText().toString());
-                                pengepul.setKelurahan(kelurahan.getText().toString());
-                                pengepul.setFoto(image);
-                                pengepul.setId(id);
-                                pengepul.setJenis_kelamin(jeniskel);
-                                mdbPicker.child("users").child(mPicker.getUid()).setValue(pengepul).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Intent i = new Intent(EditProfileActivity.this, EditSuccessActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                    fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String image = uri.toString();
+                                    pengepul.setNama(nama.getText().toString());
+                                    pengepul.setUsername(username.getText().toString());
+                                    pengepul.setNo_telp(notelp.getText().toString());
+                                    pengepul.setAlamat(alamat.getText().toString());
+                                    pengepul.setKota(kota.getText().toString());
+                                    pengepul.setEmail(email.getText().toString());
+                                    pengepul.setKecamatan(kecamatan.getText().toString());
+                                    pengepul.setKelurahan(kelurahan.getText().toString());
+                                    pengepul.setFoto(image);
+                                    pengepul.setId(id);
+                                    pengepul.setJenis_kelamin(jeniskel);
+                                    mdbPicker.child("users").child(mPicker.getUid()).setValue(pengepul).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Intent i = new Intent(EditProfileActivity.this, EditSuccessActivity.class);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
     }
@@ -207,7 +215,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             case 0:
                                 //Mengambil gambar dari Kemara ponsel
                                 Intent imageIntentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(imageIntentCamera, REQUEST_CODE_CAMERA);
+                                 startActivityForResult(imageIntentCamera, REQUEST_CODE_CAMERA);
                                 break;
 
                             case 1:
@@ -231,6 +239,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK){
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     gbr.setImageBitmap(bitmap);
+                    imageUri = getImageUri(EditProfileActivity.this,bitmap);
+                    gbr.setImageURI(imageUri);
                 }
                 break;
 
@@ -246,5 +256,11 @@ public class EditProfileActivity extends AppCompatActivity {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 }
