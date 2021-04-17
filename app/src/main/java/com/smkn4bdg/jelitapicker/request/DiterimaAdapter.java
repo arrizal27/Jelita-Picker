@@ -79,11 +79,19 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot dsnap : snapshot.getChildren()) {
                                         RequestSetorUser reqUser = dsnap.getValue(RequestSetorUser.class);
-                                        if(reqUser.getId().equals(requestSetorPengepul.getId())) {
+                                           if(reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Selesai");
+                                           }
+                                        if (user.getId().equals(dataSnapshot.child("id"))){
+                                            int minyak = Integer.parseInt(dataSnapshot.child("jml_minyak").getValue().toString());
+                                            int poin = Integer.parseInt(dataSnapshot.child("poin").getValue().toString());
+                                            int jumlah_poin = minyak * 10;
+                                            int jumlah_poin_final = poin + jumlah_poin;
+                                            dbUser.getReference().child("users").child(user.getId()).child("poin").setValue(jumlah_poin_final);
                                         }
                                     }
+
                                 }
 
                                 @Override
