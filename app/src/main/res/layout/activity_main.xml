@@ -60,18 +60,18 @@
             android:layout_margin="16dp">
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="85dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="16dp"
-                android:paddingVertical="4dp">
+                android:paddingVertical="2dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_profil"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_circle_profil"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     android:src="@drawable/ic_outline_help_outline_24" />
             </FrameLayout>
 

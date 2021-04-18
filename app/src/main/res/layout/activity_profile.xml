@@ -106,7 +106,7 @@
                 android:id="@+id/role"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hotel dan Penginapan"
+                android:text="Pengepul"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/grey" />
 
