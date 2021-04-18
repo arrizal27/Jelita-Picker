@@ -60,7 +60,7 @@ public class SelesaiAdapter extends RecyclerView.Adapter<SelesaiAdapter.Diterima
         holder.tvalasan.setText(requestSetorPengepul.getAlasantolak());
         holder.tvalasan.setVisibility(View.GONE);
         holder.txt_alasan.setVisibility(View.GONE);
-        holder.tvtotal.setText(nm.format(requestSetorPengepul.getTotal_uang()));
+        holder.tvtotal.setText("Rp."+nm.format(requestSetorPengepul.getTotal_uang()));
         Picasso.get().load(requestSetorPengepul.getFoto()).into(holder.ivbukti);
         holder.btn_acc.setVisibility(View.GONE);
         holder.btn_tolak.setVisibility(View.GONE);
