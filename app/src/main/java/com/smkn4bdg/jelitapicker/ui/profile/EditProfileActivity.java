@@ -102,8 +102,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 //Lokasi lengkap dimana gambar akan disimpan
                 String namaFile = UUID.randomUUID()+".jpg";
                 String pathImage = "File/"+namaFile;
-                File f = new File(pathImage);
-                imageUri = Uri.fromFile(f);
+
                 if (imageUri.toString().equals("dummy")) {
                     Toast.makeText(EditProfileActivity.this,"Tolong upload ulang gambar!", Toast.LENGTH_LONG).show();
                 } else {
@@ -134,7 +133,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                     pengepul.setFoto(image);
                                     pengepul.setId(id);
                                     pengepul.setJenis_kelamin(jeniskel);
-                                    mdbPicker.child("users").child(mPicker.getUid()).setValue(pengepul).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    mdbPicker.child("pengepul").child(mPicker.getUid()).setValue(pengepul).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Intent i = new Intent(EditProfileActivity.this, EditSuccessActivity.class);
