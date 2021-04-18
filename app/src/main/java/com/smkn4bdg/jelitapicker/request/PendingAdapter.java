@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,41 +63,42 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.Diterima
         holder.btn_acc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
-                            .child(auth.getUid()).child(requestSetorPengepul.getId())
-                            .child("status").setValue("Diterima");
-                    dbReq.getReference("users").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                User user = dataSnapshot.getValue(User.class);
-                                    dbUser.getReference("requestSetorUser").child(user.getId()).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            for (DataSnapshot dsnap : snapshot.getChildren()) {
-                                                RequestSetorUser reqUser = dsnap.getValue(RequestSetorUser.class);
-                                                if(reqUser.getId().equals(requestSetorPengepul.getId())) {
-                                                    dbRef.getReference("requestSetorUser").child(user.getId())
-                                                            .child(requestSetorPengepul.getId()).child("status").setValue("Diterima");
-                                                }
-                                            }
+                FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
+                        .child(auth.getUid()).child(requestSetorPengepul.getId())
+                        .child("status").setValue("Diterima");
+                dbReq.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            User user = dataSnapshot.getValue(User.class);
+                            dbUser.getReference("requestSetorUser").child(user.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for (DataSnapshot dsnap : snapshot.getChildren()) {
+                                        RequestSetorUser reqUser = dsnap.getValue(RequestSetorUser.class);
+                                        if(reqUser.getId().equals(requestSetorPengepul.getId())) {
+                                            dbRef.getReference("requestSetorUser").child(user.getId())
+                                                    .child(requestSetorPengepul.getId()).child("status").setValue("Diterima");
                                         }
+                                    }
+                                }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                        }
-                                    });
+                                }
+                            });
 
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
             }
         });
@@ -106,12 +108,12 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.Diterima
                 FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
                         .child(auth.getUid()).child(requestSetorPengepul.getId())
                         .child("status").setValue("Ditolak");
-                dbReq.getReference("users").addValueEventListener(new ValueEventListener() {
+                dbReq.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             User user = dataSnapshot.getValue(User.class);
-                            dbUser.getReference("requestSetorUser").child(user.getId()).addValueEventListener(new ValueEventListener() {
+                            dbUser.getReference("requestSetorUser").child(user.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot dsnap : snapshot.getChildren()) {
@@ -169,4 +171,3 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.Diterima
         }
     }
 }
-

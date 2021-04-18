@@ -29,20 +29,22 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.DiterimaViewHolder> {
-    private ArrayList<RequestSetorPengepul> dataSetor;
     FirebaseDatabase dbUser = FirebaseDatabase.getInstance();
     FirebaseDatabase dbRef = FirebaseDatabase.getInstance();
     FirebaseDatabase dbReq = FirebaseDatabase.getInstance();
+    FirebaseDatabase dbUsers = FirebaseDatabase.getInstance();
+    FirebaseDatabase dbReqPengepul = FirebaseDatabase.getInstance();
+    private final ArrayList<RequestSetorPengepul> dataSetor;
 
 
-    public DiterimaAdapter(ArrayList<RequestSetorPengepul> dataSetor){
+    public DiterimaAdapter(ArrayList<RequestSetorPengepul> dataSetor) {
         this.dataSetor = dataSetor;
     }
 
     @NonNull
     @Override
     public DiterimaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_setoran, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_setoran, parent, false);
         return new DiterimaViewHolder(view);
     }
 
@@ -69,27 +71,24 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
                 FirebaseDatabase.getInstance().getReference("requestSetorPengepul")
                         .child(auth.getUid()).child(requestSetorPengepul.getId())
                         .child("status").setValue("Selesai");
-                dbReq.getReference("users").addValueEventListener(new ValueEventListener() {
+                dbReq.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             User user = dataSnapshot.getValue(User.class);
-                            dbUser.getReference("requestSetorUser").child(user.getId()).addValueEventListener(new ValueEventListener() {
+                            dbUser.getReference("requestSetorUser").child(user.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot dsnap : snapshot.getChildren()) {
                                         RequestSetorUser reqUser = dsnap.getValue(RequestSetorUser.class);
-                                           if(reqUser.getId().equals(requestSetorPengepul.getId())) {
+                                        if (reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Selesai");
-                                           }
-                                        if (user.getId().equals(dataSnapshot.child("id"))){
-                                            int minyak = Integer.parseInt(dataSnapshot.child("jml_minyak").getValue().toString());
-                                            int poin = Integer.parseInt(dataSnapshot.child("poin").getValue().toString());
-                                            int jumlah_poin = minyak * 10;
-                                            int jumlah_poin_final = poin + jumlah_poin;
-                                            dbUser.getReference().child("users").child(user.getId()).child("poin").setValue(jumlah_poin_final);
                                         }
+
+
+
+
                                     }
 
                                 }
@@ -103,6 +102,43 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
 
                         }
                     }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                dbUsers.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                            if (dataSnapshot1.child("id").getValue().equals(requestSetorPengepul.getId_user())){
+                                int jumlah_poin = 0;
+                                if (dataSnapshot1.child("role").getValue().equals("Rumah Tangga")){
+                                    int poin = Integer.parseInt(dataSnapshot1.child("poin").getValue().toString());
+                                    jumlah_poin = poin + 50;
+                                }
+                                if (dataSnapshot1.child("role").getValue().equals("Pedagang")){
+                                    int poin = Integer.parseInt(dataSnapshot1.child("poin").getValue().toString());
+                                    jumlah_poin = poin + 100;
+                                }
+                                if (dataSnapshot1.child("role").getValue().equals("Cafe dan Rumah Makan")){
+                                    int poin = Integer.parseInt(dataSnapshot1.child("poin").getValue().toString());
+                                    jumlah_poin = poin + 150;
+                                }
+                                if (dataSnapshot1.child("role").getValue().equals("Hotel dan Penginapan")){
+                                    int poin = Integer.parseInt(dataSnapshot1.child("poin").getValue().toString());
+                                    jumlah_poin = poin + 200;
+                                }
+                                dbRef.getReference("users").child(requestSetorPengepul.getId_user()).child("poin").setValue(jumlah_poin);
+                            }
+
+                        }
+
+                    }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -121,14 +157,14 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
                 dbReq.getReference("users").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             User user = dataSnapshot.getValue(User.class);
                             dbUser.getReference("requestSetorUser").child(user.getId()).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot dsnap : snapshot.getChildren()) {
                                         RequestSetorUser reqUser = dsnap.getValue(RequestSetorUser.class);
-                                        if(reqUser.getId().equals(requestSetorPengepul.getId())) {
+                                        if (reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Ditolak");
                                         }
@@ -160,9 +196,10 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
     }
 
     public class DiterimaViewHolder extends RecyclerView.ViewHolder {
-        TextView tvpengepul,tvtelepon,tvalamat,tvtanggalsetor,tvjenispembayaran,tvstatus,tvalasan,tvtotal,txt_alasan;
+        TextView tvpengepul, tvtelepon, tvalamat, tvtanggalsetor, tvjenispembayaran, tvstatus, tvalasan, tvtotal, txt_alasan;
         ImageView ivbukti;
-        Button btn_tolak,btn_acc;
+        Button btn_tolak, btn_acc;
+
         public DiterimaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvpengepul = itemView.findViewById(R.id.txt_pengepul);
