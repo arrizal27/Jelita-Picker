@@ -54,6 +54,7 @@ public class SelesaiFragment extends Fragment {
                     for (DataSnapshot datasnap : snapshot.getChildren()){
                         RequestSetorPengepul requestSetorPengepul = datasnap.getValue(RequestSetorPengepul.class);
                         dataRequest.add(requestSetorPengepul);
+
                     }
                     SelesaiAdapter selesaiAdapter = new SelesaiAdapter(dataRequest);
                     recyclerView.setAdapter(selesaiAdapter);

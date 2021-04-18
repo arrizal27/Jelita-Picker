@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +29,7 @@ public class PendingFragment extends Fragment {
     private RecyclerView recyclerView;
     private DatabaseReference dbUser,dbReq;
     private FirebaseDatabase mfirebaseInstance;
+    private Button acc;
 
     public PendingFragment() {
         // Required empty public constructor
@@ -40,6 +43,7 @@ public class PendingFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         dataRequest = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         getdata();
 
 

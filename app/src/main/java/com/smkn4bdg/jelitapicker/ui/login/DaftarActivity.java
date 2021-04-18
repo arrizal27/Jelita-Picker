@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -43,6 +44,7 @@ public class DaftarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_daftar);
 
         findView();
+        fillSpinner();
 
         btndaftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +181,15 @@ public class DaftarActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void fillSpinner(){
+        String[] jenis_kelamin = {"Laki - Laki","Perempuan"};
+
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(DaftarActivity.this, android.R.layout.simple_spinner_item, jenis_kelamin);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        jk.setAdapter(genderAdapter);
+
     }
 
     public void showToast(String toastText) {

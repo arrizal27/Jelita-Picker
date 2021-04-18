@@ -67,9 +67,8 @@
 
             <Spinner
                 android:id="@+id/dropdown_jk"
-                android:entries="@array/jk"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
