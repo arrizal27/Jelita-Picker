@@ -5,7 +5,7 @@
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
 
-    <string name="daftar">Daftar dengan mengisi form daftar(nama,username,password,nohp,dan role)</string>
+    <string name="daftar">Daftar dengan mengisi form daftar(nama,username,password,dan nohp)</string>
     <string name="login">Login dengan memasukan nohp serta password yang sudah di daftarkan sebelumnya</string>
     <string name="ceksetor">Di Menu Utama klik tombol "Request" untuk melihat apkakah ada request untuk setor dari user</string>
     <string name="accsetor">Setelah mengecek dan ada request dati user, pilihlah mana yang memenuhi kriteria dan layak untuk diterima, jika tidak maka tolak </string>
