@@ -89,12 +89,12 @@ public class DiterimaFragment extends Fragment {
         dbReq.child("requestSetorPengepul").child(id).orderByChild("status").equalTo("Diterima").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.getChildrenCount()>0){
                     for (DataSnapshot datasnap : snapshot.getChildren()){
                         RequestSetorPengepul requestSetorPengepul = datasnap.getValue(RequestSetorPengepul.class);
                         dataRequest.add(requestSetorPengepul);
                     }
-                    DiterimaAdapter diterimaAdapter = new DiterimaAdapter(dataRequest);
+                    DiterimaAdapter diterimaAdapter = new DiterimaAdapter(DiterimaFragment.this.getContext(),dataRequest);
                     recyclerView.setAdapter(diterimaAdapter);
                     diterimaAdapter.notifyDataSetChanged();
                 }

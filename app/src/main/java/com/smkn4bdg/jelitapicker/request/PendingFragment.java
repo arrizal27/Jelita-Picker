@@ -56,13 +56,14 @@ public class PendingFragment extends Fragment {
         dbref.child(id).orderByChild("status").equalTo("Pending").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.getChildrenCount() > 0){
                     for (DataSnapshot datasnap : snapshot.getChildren()){
                         RequestSetorPengepul requestSetorPengepul = datasnap.getValue(RequestSetorPengepul.class);
                         dataRequest.add(requestSetorPengepul);
                     }
-                    PendingAdapter pendingAdapter = new PendingAdapter(dataRequest);
+                    PendingAdapter pendingAdapter = new PendingAdapter(PendingFragment.this.getContext(),dataRequest);
                     recyclerView.setAdapter(pendingAdapter);
+                    pendingAdapter.notifyDataSetChanged();
                 }
             }
 

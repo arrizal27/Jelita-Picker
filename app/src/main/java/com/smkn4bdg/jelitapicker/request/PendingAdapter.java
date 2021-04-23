@@ -1,5 +1,8 @@
 package com.smkn4bdg.jelitapicker.request;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +34,11 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.Diterima
     FirebaseDatabase dbUser = FirebaseDatabase.getInstance();
     FirebaseDatabase dbRef = FirebaseDatabase.getInstance();
     FirebaseDatabase dbReq = FirebaseDatabase.getInstance();
+    Context ct;
 
 
-    public PendingAdapter(ArrayList<RequestSetorPengepul> dataSetor){
+    public PendingAdapter(Context ct, ArrayList<RequestSetorPengepul> dataSetor){
+        this.ct = ct;
         this.dataSetor = dataSetor;
     }
 
@@ -79,6 +84,9 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.Diterima
                                         if(reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Diterima");
+                                            Intent i = new Intent(ct,RiwayatActivity.class);
+                                            ct.startActivity(i);
+                                            ((Activity)ct).finish();
                                         }
                                     }
                                 }
@@ -121,6 +129,9 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.Diterima
                                         if(reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Ditolak");
+                                            Intent i = new Intent(ct,RiwayatActivity.class);
+                                            ct.startActivity(i);
+                                            ((Activity)ct).finish();
                                         }
                                     }
                                 }

@@ -1,5 +1,7 @@
 package com.smkn4bdg.jelitapicker.request;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +37,11 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
     FirebaseDatabase dbUsers = FirebaseDatabase.getInstance();
     FirebaseDatabase dbReqPengepul = FirebaseDatabase.getInstance();
     private final ArrayList<RequestSetorPengepul> dataSetor;
+    Context ct;
 
 
-    public DiterimaAdapter(ArrayList<RequestSetorPengepul> dataSetor) {
+    public DiterimaAdapter(Context ct,ArrayList<RequestSetorPengepul> dataSetor) {
+        this.ct = ct;
         this.dataSetor = dataSetor;
     }
 
@@ -84,6 +88,10 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
                                         if (reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Selesai");
+                                            Intent i = new Intent(ct,RiwayatActivity.class);
+                                            ct.startActivity(i);
+                                            ((Activity)ct).finish();
+
                                         }
 
 
@@ -167,6 +175,9 @@ public class DiterimaAdapter extends RecyclerView.Adapter<DiterimaAdapter.Diteri
                                         if (reqUser.getId().equals(requestSetorPengepul.getId())) {
                                             dbRef.getReference("requestSetorUser").child(user.getId())
                                                     .child(requestSetorPengepul.getId()).child("status").setValue("Ditolak");
+                                            Intent i = new Intent(ct,RiwayatActivity.class);
+                                            ct.startActivity(i);
+                                            ((Activity)ct).finish();
                                         }
                                     }
                                 }
