@@ -97,16 +97,6 @@
             android:text="Masuk"
             app:cornerRadius="12dp"/>
 
-        <ImageButton
-            android:id="@+id/googlesignin"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:src="@drawable/common_google_signin_btn_icon_light"
-            android:text="test" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

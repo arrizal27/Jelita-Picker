@@ -70,12 +70,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        googlelogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginActivity.this.googleSign();
-            }
-        });
+//        googlelogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LoginActivity.this.googleSign();
+//            }
+//        });
 
     }
 
