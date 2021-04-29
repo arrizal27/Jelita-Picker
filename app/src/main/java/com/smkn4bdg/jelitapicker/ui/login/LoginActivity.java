@@ -84,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
         pass = findViewById(R.id.login_password);
         btnLogin = findViewById(R.id.btn_masuk);
         back = findViewById(R.id.back_login);
-        googlelogin = findViewById(R.id.googlesignin);
         dbPicker = FirebaseDatabase.getInstance().getReference("pengepul");
         firebaseAuth = FirebaseAuth.getInstance();
     }
