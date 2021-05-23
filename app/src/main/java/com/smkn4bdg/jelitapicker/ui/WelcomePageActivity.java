@@ -15,7 +15,7 @@ import com.smkn4bdg.jelitapicker.ui.login.LoginActivity;
 public class WelcomePageActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     Button btnLogin;
-    Button btnDaftar;
+//    Button btnDaftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +26,17 @@ public class WelcomePageActivity extends AppCompatActivity {
             // User is logged in
             System.out.println("Email : " +firebaseAuth.getCurrentUser().getEmail());
             btnLogin.setText("Masuk");
-            btnDaftar.setEnabled(false);
-            btnDaftar.setVisibility(View.INVISIBLE);
+//            btnDaftar.setEnabled(false);
+//            btnDaftar.setVisibility(View.INVISIBLE);
         }
 
-        btnDaftar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent regis = new Intent(WelcomePageActivity.this, DaftarActivity.class);
-                startActivity(regis);
-            }
-        });
+//        btnDaftar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent regis = new Intent(WelcomePageActivity.this, DaftarActivity.class);
+//                startActivity(regis);
+//            }
+//        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ public class WelcomePageActivity extends AppCompatActivity {
 
     private void findView(){
         btnLogin = findViewById(R.id.btnlogin);
-        btnDaftar = findViewById(R.id.btndaftar);
+//        btnDaftar = findViewById(R.id.btndaftar);
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
